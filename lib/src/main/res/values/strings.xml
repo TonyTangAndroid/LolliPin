@@ -20,12 +20,12 @@
     <string name="button9_small_text">WXYZ</string>
     <string name="button11_large_text">0</string>
 
-    <string name="pin_code_forgot_text">Forgot?</string>
+    <string name="pin_code_forgot_text">Esqueceu?</string>
     <string name="pin_code_step_disable">Disable %d-digit Pincode</string>
-    <string name="pin_code_step_create">Create a %d-digit Pincode</string>
-    <string name="pin_code_step_change">Enter your current %d-digit Pincode</string>
-    <string name="pin_code_step_unlock">Enter your %d-digit Pincode</string>
-    <string name="pin_code_step_enable_confirm">Confirm your %d-digit Pincode</string>
+    <string name="pin_code_step_create">Crie uma senha de %d dígitos</string>
+    <string name="pin_code_step_change">Digite sua atual senha de %d dígitos</string>
+    <string name="pin_code_step_unlock">Digite sua senha de %d dígitos</string>
+    <string name="pin_code_step_enable_confirm">Confirme sua senha</string>
 
     <string name="pin_code_fingerprint_text">Fingerprint</string>
     <string name="pin_code_fingerprint_success">Fingerprint recognized</string>

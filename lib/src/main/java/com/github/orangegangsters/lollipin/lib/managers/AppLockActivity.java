@@ -119,6 +119,7 @@ public abstract class AppLockActivity extends PinActivity implements KeyboardBut
         mStepTextView = (TextView) this.findViewById(R.id.pin_code_step_textview);
         mPinCodeRoundView = (PinCodeRoundView) this.findViewById(R.id.pin_code_round_view);
         mPinCodeRoundView.setPinLength(this.getPinLength());
+
         mForgotTextView = (TypefaceTextView) this.findViewById(R.id.pin_code_forgot_textview);
         mForgotTextView.setOnClickListener(this);
         mKeyboardView = (KeyboardView) this.findViewById(R.id.pin_code_keyboard_view);
@@ -458,6 +459,16 @@ public abstract class AppLockActivity extends PinActivity implements KeyboardBut
      * @return the number of digits in the PIN
      */
     public int getPinLength() {
+        return AppLockActivity.DEFAULT_PIN_LENGTH;
+    }
+
+    /**
+     * Gets the number of digits in the pin code.  Subclasses can override this to change the
+     * length of the pin.
+     *
+     * @return the number of digits in the PIN
+     */
+    public int getPinColour() {
         return AppLockActivity.DEFAULT_PIN_LENGTH;
     }
 

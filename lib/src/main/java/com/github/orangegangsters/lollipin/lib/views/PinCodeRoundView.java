@@ -130,4 +130,15 @@ public class PinCodeRoundView extends RelativeLayout {
         }
         refresh(0);
     }
+
+    /**
+     * Sets the length of the pin code.
+     *
+     * @param colour the length of the pin code
+     */
+    public void setPinColour(int colour) {
+        mFullDotDrawableId = getResources().getDrawable(R.drawable.pin_code_round_full);
+
+        refresh(0);
+    }
 }
