@@ -1,1 +1,1 @@
-include ':app', ':lib', ':typefaceViewLib'
+include ':app', ':lib'

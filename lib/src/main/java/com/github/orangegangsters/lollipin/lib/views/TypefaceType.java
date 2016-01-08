@@ -1,4 +1,4 @@
-package com.github.omadahealth.typefaceview;
+package com.github.orangegangsters.lollipin.lib.views;
 
 import android.util.Log;
 

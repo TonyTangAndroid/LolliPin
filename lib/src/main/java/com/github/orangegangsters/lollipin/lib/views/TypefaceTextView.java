@@ -1,26 +1,30 @@
-package com.github.omadahealth.typefaceview;
+package com.github.orangegangsters.lollipin.lib.views;
 
 import android.annotation.TargetApi;
 import android.content.Context;
 import android.content.res.TypedArray;
 import android.graphics.Typeface;
 import android.os.Build;
+import android.text.Html;
 import android.util.AttributeSet;
-import android.view.KeyEvent;
-import android.widget.EditText;
+import android.widget.TextView;
 
-import com.github.omadahealth.typefaceview.interfaces.EditTextOnKeyImeInterface;
+import com.github.orangegangsters.lollipin.lib.R;
 
 import java.util.Hashtable;
 
 /**
  * Created by stoyand & oliviergoutay on 4/7/14.
  */
-public class TypefaceEditText extends EditText {
+public class TypefaceTextView extends TextView {
     /**
      * The default typeface
      */
     public static final int DEFAULT_TYPEFACE = TypefaceType.ROBOTO_REGULAR.getValue();
+    /**
+     * Default html false
+     */
+    public static final boolean DEFAULT_HTML_ENABLED = false;
     /**
      * A hash we use to hold multiple typefaces for views
      */
@@ -29,32 +33,31 @@ public class TypefaceEditText extends EditText {
      * The current typeface that the font is set to
      */
     private TypefaceType mCurrentTypeface = TypefaceType.ROBOTO_REGULAR;
+
     /**
-     * The interface to call in {@link #onKeyPreIme(int, KeyEvent)}.
-     * If you handled the event, return true. If you want to allow the
-     * event to be handled by the next receiver, return false.
+     * True if the supplied text should be displayed as html
      */
-    private EditTextOnKeyImeInterface mOnKeyCallback;
+    private boolean mHtmlEnabled;
 
-    public TypefaceEditText(Context context) {
+    public TypefaceTextView(Context context) {
         super(context);
-        setCustomTypeface(context, null);
+        loadAttributes(context, null);
     }
 
-    public TypefaceEditText(Context context, AttributeSet attrs) {
+    public TypefaceTextView(Context context, AttributeSet attrs) {
         super(context, attrs);
-        setCustomTypeface(context, attrs);
+        loadAttributes(context, attrs);
     }
 
-    public TypefaceEditText(Context context, AttributeSet attrs, int defStyleAttr) {
+    public TypefaceTextView(Context context, AttributeSet attrs, int defStyleAttr) {
         super(context, attrs, defStyleAttr);
-        setCustomTypeface(context, attrs);
+        loadAttributes(context, attrs);
     }
 
     @TargetApi(Build.VERSION_CODES.LOLLIPOP)
-    public TypefaceEditText(Context context, AttributeSet attrs, int defStyleAttr, int defStyleRes) {
+    public TypefaceTextView(Context context, AttributeSet attrs, int defStyleAttr, int defStyleRes) {
         super(context, attrs, defStyleAttr, defStyleRes);
-        setCustomTypeface(context, attrs);
+        loadAttributes(context, attrs);
     }
 
     /**
@@ -75,14 +78,23 @@ public class TypefaceEditText extends EditText {
     }
 
     @Override
-    public boolean onKeyPreIme(int keyCode, KeyEvent event) {
-        //If you handled the event, return true. If you want to allow
-        //the event to be handled by the next receiver, return false.
-        if (mOnKeyCallback != null) {
-            return mOnKeyCallback.onKeyPreIme(keyCode, event);
+    public void setText(CharSequence text, BufferType type) {
+        if (mHtmlEnabled) {
+            super.setText(Html.fromHtml(text.toString()), type);
+        } else {
+            super.setText(text, type);
         }
+    }
 
-        return super.onKeyPreIme(keyCode, event);
+    /**
+     * Sets {@link #mHtmlEnabled}, and calls {@link #setText(CharSequence, BufferType)}
+     *
+     * @param text The text
+     * @param html True if text is html
+     */
+    public void setText(CharSequence text, boolean html) {
+        mHtmlEnabled = html;
+        setText(text, null);
     }
 
     /**
@@ -91,14 +103,18 @@ public class TypefaceEditText extends EditText {
      * @param context
      * @param attrs
      */
-    private void setCustomTypeface(Context context, AttributeSet attrs) {
+    private void loadAttributes(Context context, AttributeSet attrs) {
         //Typeface.createFromAsset doesn't work in the layout editor. Skipping...
         if (isInEditMode() || attrs == null || Build.VERSION.SDK_INT < Build.VERSION_CODES.HONEYCOMB) {
             return;
         }
 
-        TypedArray styledAttrs = context.obtainStyledAttributes(attrs, R.styleable.TypefaceView);
-        Integer fontInt = styledAttrs.getInt(R.styleable.TypefaceView_tv_typeface, DEFAULT_TYPEFACE);
+        TypedArray styledAttrs = context.obtainStyledAttributes(attrs, R.styleable.TypefaceTextView);
+        Integer fontInt = styledAttrs.getInt(R.styleable.TypefaceTextView_tv_typeface, DEFAULT_TYPEFACE);
+        mHtmlEnabled = styledAttrs.getBoolean(R.styleable.TypefaceTextView_tv_html, DEFAULT_HTML_ENABLED);
+        if (mHtmlEnabled) {
+            setText(getText());
+        }
         styledAttrs.recycle();
 
         mCurrentTypeface = TypefaceType.getTypeface(fontInt);
@@ -111,21 +127,5 @@ public class TypefaceEditText extends EditText {
      */
     public TypefaceType getCurrentTypeface() {
         return mCurrentTypeface;
-    }
-
-    /**
-     * @return the the {@link #mOnKeyCallback}
-     */
-    public EditTextOnKeyImeInterface getOnKeyCallback() {
-        return mOnKeyCallback;
-    }
-
-    /**
-     * Sets the {@link #mOnKeyCallback} that is called in {@link #onKeyPreIme(int, KeyEvent)}
-     *
-     * @param onKeyCallback
-     */
-    public void setOnKeyCallback(EditTextOnKeyImeInterface onKeyCallback) {
-        this.mOnKeyCallback = onKeyCallback;
     }
 }

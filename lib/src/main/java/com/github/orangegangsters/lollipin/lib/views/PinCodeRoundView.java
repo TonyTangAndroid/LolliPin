@@ -58,7 +58,7 @@ public class PinCodeRoundView extends RelativeLayout {
 
             LayoutInflater inflater = (LayoutInflater) mContext.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
             PinCodeRoundView view = (PinCodeRoundView) inflater.inflate(R.layout.view_round_pin_code, this);
-            mRoundContainer = (ViewGroup) view.findViewById( R.id.round_container );
+            mRoundContainer = (ViewGroup) view.findViewById(R.id.round_container);
 
             mRoundViews = new ArrayList<>();
         }
@@ -86,6 +86,7 @@ public class PinCodeRoundView extends RelativeLayout {
 
     /**
      * Sets a custom empty dot drawable for the {@link ImageView}s.
+     *
      * @param drawable the resource Id for a custom drawable
      */
     public void setEmptyDotDrawable(Drawable drawable) {
@@ -94,6 +95,7 @@ public class PinCodeRoundView extends RelativeLayout {
 
     /**
      * Sets a custom full dot drawable for the {@link ImageView}s.
+     *
      * @param drawable the resource Id for a custom drawable
      */
     public void setFullDotDrawable(Drawable drawable) {
@@ -102,6 +104,7 @@ public class PinCodeRoundView extends RelativeLayout {
 
     /**
      * Sets a custom empty dot drawable for the {@link ImageView}s.
+     *
      * @param drawableId the resource Id for a custom drawable
      */
     public void setEmptyDotDrawable(int drawableId) {
@@ -110,6 +113,7 @@ public class PinCodeRoundView extends RelativeLayout {
 
     /**
      * Sets a custom full dot drawable for the {@link ImageView}s.
+     *
      * @param drawableId the resource Id for a custom drawable
      */
     public void setFullDotDrawable(int drawableId) {

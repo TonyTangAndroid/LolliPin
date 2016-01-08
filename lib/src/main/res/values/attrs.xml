@@ -15,4 +15,11 @@
         <attr name="lp_pin_forgot_dialog_negative" format="string" />
     </declare-styleable>
 
+    <declare-styleable name="TypefaceTextView">
+        <attr name="tv_typeface" format="enum">
+            <enum name="roboto_regular" value="0" />
+            <enum name="roboto_light" value="1" />
+        </attr>
+        <attr name="tv_html" format="boolean" />
+    </declare-styleable>
 </resources>
