@@ -351,12 +351,10 @@ public abstract class AppLockActivity extends PinActivity implements KeyboardBut
      */
     @Override
     public void onBackPressed() {
-
-        if(mType == AppLock.ENABLE_PINLOCK || mType == AppLock.CHANGE_PIN) {
+        if(mType == AppLock.ENABLE_PINLOCK || mType == AppLock.CHANGE_PIN ||  mType == AppLock.CONFIRM_PIN) {
             super.onBackPressed();
             return;
         }
-
         if (getBackableTypes().contains(mType)) {
             if (AppLock.UNLOCK_PIN == getType()) {
                 mLockManager.getAppLock().setPinChallengeCancelled(true);
